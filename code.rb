@@ -181,64 +181,48 @@ nasa_data = [
   }
 ]
 
+
 # 1. Create a method called company_name that takes in two arguments, an array and a company name.The method must return the entire hash for the given company.
 # Your code here
 
 def company_name(data, name)
-  return data.first[name]
+  return data[0][name]
 end
 
-
-# puts company_name(nasa_data, "Garmin International")
+puts company_name(nasa_data, "Telewander")
 
 # 2. Create a method called location that takes in an array and returns the city and state for every company.
 # Your code here
 
-def location(nasa_data)
-  company_str = ""
-  nasa_data.first.each do |company|
-    company_str += "#{company.first}: "
-    company_str += "#{company[1]["location_1_city"]}, "
-    company_str += "#{company[1]["location_1_state"]} "
-    company_str += "\n"
+def location(data)
+  final_string = ""
+  data[0].each do |company, attributes|
+    final_string += company + ":" + " "
+    final_string += "#{attributes["location_1_state"]}, "
+    final_string += "#{attributes["location_1_city"]}\n"
   end
-  return company_str
+  return final_string
 end
 
-# puts location(nasa_data)
+puts location(nasa_data)
 
-
-# type(nasa_data)
-#
 # 6. Create a method called gmail that takes in an array and returns the amount of companies that have gmail.com as their email_hosts.
 # Your code here
 
-def gmail(nasa_data)
-  total = 0
-  nasa_data.each do |company, attributes|
-    if attributes["email_hosts"] == "gmail.com"
-      total += 1
-    end
-  end
-  return total
-end
+# skipped for time
 
-
-
-puts gmail(nasa_data)
+# puts gmail(nasa_data)
 
 # 8. Create a method called no_domain that takes in an array and returns the number of companies that **do not** have a domain listed in nasa_data.
-
-
 
 def no_domain(data)
   total = 0
   data[0].each do |company, attributes|
-    if attributes["domain"] == nil
+    if attributes["domain"] != nil
       total += 1
     end
   end
-  puts count
+  total
 end
 
-puts no_domain
+puts no_domain(nasa_data)
